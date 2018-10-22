@@ -1,11 +1,11 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,10pt]{article}
 \usepackage{pgfgantt}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\hypersetup{colorlinks, 
-            breaklinks, 
-            urlcolor=blue, 
-            linkcolor=blue, 
+\hypersetup{colorlinks,
+            breaklinks,
+            urlcolor=blue,
+            linkcolor=blue,
             citecolor=blue} % Set link colors
 \usepackage[left=2cm,top=2cm,bottom=2cm,right=2cm]{geometry}
 \setlength{\parskip}{0.75ex}
@@ -83,7 +83,7 @@ one can see that it is too complicated to solve exactly. Basis sets
 help solve this type of problems. They give a relativelly good
 approximation to the elctronic wavefunction so computation of the
 whole problem can be done more effectivelly.
- 
+
 
 \ac{MW} basis have several properites that are useful when designing
 numerical solutions to partial differential equations. Some of these
@@ -99,7 +99,7 @@ I will learn how to implement this method and make adjustments to my computation
 
 \subsection{Density Functional Theory}
 
-Hohenberg and Kohn 
+Hohenberg and Kohn
 demonstrated that the
 electronic energy ($E_e$ in equation 1) is completelly determined by
 the electron density $\rho$\cite{Jensen:2017,parr1994density}. The electron density $\rho$ the integral of the
@@ -150,7 +150,7 @@ s_i(r) = \vert r - r_i\vert - R_i
 \end{equation}
 The sphere surrounding the ith atom is described by the following characteristic function.
 \begin{equation}
-C_i(r) = 1 - \Theta (s_i(r)) 
+C_i(r) = 1 - \Theta (s_i(r))
 \end{equation}
 Where $\Theta$ is the heavyside function, which returns 1 inside the
 cavity ($C$ in function 3) 0 outside and $1/2$ in the
@@ -175,7 +175,7 @@ function $C$, the following dielectric function is computed.
 \begin{equation}
 \epsilon (r) = \epsilon_0 C(r) + \epsilon (1 - C(r))
 \end{equation}
-these equations (2 through 6) are the same as in \cite{FossoTande:2013ka}. 
+these equations (2 through 6) are the same as in \cite{FossoTande:2013ka}.
 
 
 \section{Project description}
@@ -190,8 +190,9 @@ The master project will be divided into the following activities.
 \subsection{Literature search and theoretical development}
 
 To carry out the project successfully, I will acquire the relevant
-background in the following topics: \acl{DFT} \cite{Jensen:2017}, \aclp{MW} \cite{Frediani:2013} \cite{FossoTande:2013ka}  \cite{Beylkin1999AdaptiveSO} , and \acl{DC} 
-methods \cite{FossoTande:2013ka} \cite{Lipparini:2010bg}.
+background in the following topics: \acl{DFT} \cite{Jensen:2017}, \aclp{MW}
+\cite{Frediani:2013, FossoTande:2013ka, Beylkin1999AdaptiveSO} ,
+and \acl{DC} methods \cite{FossoTande:2013ka, Lipparini:2010bg}.
 sources referenced here for each of the subjects are only what has been aquired so far.
 %\todo{here you should list the references...}
 
@@ -210,18 +211,22 @@ done on the subect i am working on. The \mrcpp{} package is based
 around the numerical \aclp{MW} representations of functions and
 operators.
 
+
 \subsection{Variational formulation}
 
 A recent development of \ac{PCM}, has made it possible to include the
 solvent polarization in the standard
 \ac{SCF} procedure, by recasting the electrostatic polarization
 problem as a minimization procedure for a solvation energy
-functional\cite{Lipparini:2010bg}. Such a formulationis is 
+functional\cite{Lipparini:2010bg}. Such a formulation is
 ideal for a
 \ac{MW} implementation, where the solvent response is described by one
 single function, on top of the occupied molecular
 orbitals. The implementation, which
 will require one loop only instead of two nested loops, will be simplified.
+
+I will include solvent degrees of freedom in the \ac{SCF} by making use of the
+solvation energy functional developed by \cite{Lipparini:2010bg}.
 
 \subsection{Density-dependent cavity}
 
@@ -232,6 +237,11 @@ density instead, thus making the cavity more dynamic to changes and
 forces acting on the molecule. This will give us a density dependent
 dielectric function.
 
+I will work with the method used in \cite{FossoTande:2013ka} in order
+to create this cavity. I will make the dielectric function (the function
+dependent on the cavity function) a functional dependent on $\rho(\bar{r})$
+where $\bar{r}$ is a vector of three dimensional coordinates.
+
 \subsection{Molecular properties}
 
 Once the framework for the solvation effect is in place, we will apply
@@ -240,6 +250,9 @@ solvation methods based on the solution of a boundary equation, the
 direct solution of the generalizaed Poisson equation used here will allow to
 account for escaped charge effects, which can be important for diffuse
 excited states such as Rydberg excitations.
+
+I will implement solvation effect contributions to the molecular properties
+of the system and add it to the perturbation theory equation.
 
 \begin{figure}[!htb]
 \begin{ganttchart}
@@ -254,7 +267,7 @@ canvas/.style=%
 draw=blue, dashed, very thick}
 ]
 {1}{9}
-\gantttitle{2018}{4} 
+\gantttitle{2018}{4}
 \gantttitle{2019}{5} \\
 \gantttitlelist{9,10,11,12,1,2,3,4,5}{1} \\
 \ganttgroup{Literature study}{1}{6} \\
@@ -293,7 +306,7 @@ The successive workpacakges
 properties) are more ambitious, but they also carry slightly more
 risk. They are completely independent of each
 other, thus even if one or more of them will not be successful, that
-will not harm the project as a whole. 
+will not harm the project as a whole.
 
 \subsection*{References}
 %\footnotesize
@@ -302,5 +315,3 @@ will not harm the project as a whole.
 \input{acronyms.tex}
 
 \end{document}
-
-
